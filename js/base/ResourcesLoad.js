@@ -21,6 +21,7 @@ export class ResourceLoader {
 
     /* 定义图片加载完成方法 */
     onloaded(callback) {
+        // console.log(this); // ResourceLoader
         let n = 0; // 计数器，记加载图片成功的数目
         //  遍历 map 集合  let self = this;
         for (const val of this.map.values()) {
@@ -31,7 +32,7 @@ export class ResourceLoader {
                 //  map 数据的长度 用 size 表示
                 if (n >= this.map.size) {
                     // 全部加载完整,返回加载完成后的map集合
-                    callback(this.map)
+                    callback(this.map);
                 }
             }
         }
