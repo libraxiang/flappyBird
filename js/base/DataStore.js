@@ -24,8 +24,8 @@ export class DataStore {
     }
     //  销毁数据
     destroy() {
-        for (const val of this.map.values()) {
-            val = {};
+        for (var  val  of this.map.values()) {
+            val = null;
         }
     }
 }
