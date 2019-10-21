@@ -12,7 +12,8 @@ export class Main {
     constructor() {
         console.log("Game Start");
         // 初始化画布
-        this.canvas = document.getElementById("game");
+      this.canvas = document.getElementById("game"); // 页面
+        // this.canvas =wx.createCanvas(); // 微信
         this.ctx = this.canvas.getContext("2d");
 
         //  初始化资源加载器  let self = this;       
