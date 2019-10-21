@@ -35,9 +35,10 @@ export class Main{
         this.DataStore.ctx = this.ctx;
         this.DataStore.res = map;
 
-        // this.init()
+        // this.init();        
+    }
+    // 游戏初始化
+    init() {
         
-        // 游戏初始化
-        // init(){}
     }
 }
