@@ -13,14 +13,14 @@ export class Birds extends Sprite{
         this.clippingWidth = [34, 34, 34]; // 裁剪的宽度
         this.clippingHeight = [24, 24, 24]; // 裁剪的高度
         const canvas = DataStore.getInstance().canvas;
-        const birdX = canvas.width / 4; // 小鸟的初始X最表
+        const birdX = canvas.width / 4; // 小鸟的初始X坐标
         this.birdsX = [birdX, birdX, birdX];
         const land = Sprite.getImage("land");
         const birdY = (canvas.height - land.height) / 2;
         this.birdsY = [birdY, birdY, birdY];
         this.birdsWidth = [34, 34, 34];  //  小鸟的宽度
-        this.birdsheight = [24, 24, 24];  //  小鸟的高度
-        this.y = [birdY,birdY,birdY] ; // 小鸟的实时Y坐标
+        this.birdsHeight = [24, 24, 24];  //  小鸟的高度
+        this.y = [birdY,birdY,birdY] ; // 小鸟的实时y坐标
         this.index = 0;  // 切换小鸟，实现动态效果
         this.count = 0; // 计数器
         this.time = 0;  // 计时器，自由落体时间
@@ -33,6 +33,17 @@ export class Birds extends Sprite{
             this.count = 0;
         }
         this.index = Math.floor(this.count);
+
+        //  小鸟的自由落体运动
+        const g = 0.98/2; // 模拟重力加速度
+        // 小鸟向上的位移
+        const Y = 25;
+        //  下落的距离
+        const offsetY = (g*this.time*(this.time - Y))/2
+        for (let i = 0; i < 3; i++) {
+           this.birdsY[i] = offsetY + this.y[i]            
+        }
+        this.time++;
         
         super.draw(this.img,
             this.clippingX[this.index],
@@ -42,7 +53,7 @@ export class Birds extends Sprite{
             this.birdsX[this.index],
             this.birdsY[this.index],
             this.birdsWidth[this.index],
-            this.birdsheight[this.index]
+            this.birdsHeight[this.index]
         );
     }
 }

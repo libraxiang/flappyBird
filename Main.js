@@ -6,14 +6,18 @@ import { Background } from "./js/runtime/Background.js";
 import { Land } from "./js/runtime/Land.js";
 import { Director } from "./js/Director.js";
 import { Birds } from "./js/player/Birds.js";
+import { StartButton } from "./js/player/StartButton.js";
+import { Score } from "./js/player/Score.js";
 
 
 export class Main {
     constructor() {
         console.log("Game Start");
+
         // 初始化画布
-      this.canvas = document.getElementById("game"); // 页面
+        this.canvas = document.getElementById("game"); // 页面
         // this.canvas =wx.createCanvas(); // 微信
+
         this.ctx = this.canvas.getContext("2d");
 
         //  初始化资源加载器  let self = this;       
@@ -23,10 +27,10 @@ export class Main {
         this.DataStore = DataStore.getInstance();
 
         // 初始化导演
-        this.directory = Director.getInstance();
+        this.director = Director.getInstance();
 
         //  加载完成之后，执行其他操作
-        this.loader.onloaded(map => this.onResourceLoaded(map))
+        this.loader.onloaded(map => this.onResourceLoaded(map));
 
         /*  let bg = map.get("background");
             self.ctx.drawImage(bg, 0, 0, bg.width, bg.height); */
@@ -44,23 +48,44 @@ export class Main {
         this.DataStore.canvas = this.canvas;
         this.DataStore.ctx = this.ctx;
         this.DataStore.res = map;
+        this.ctx.fillText("aaa",0,0);
 
         this.init();
     }
     // 游戏初始化,初始化游戏中的数据，将其保存进变量池中
     init() {
-        // 模拟画背景图
-        // new Background().draw();
-        // new Land().draw();
+
+        this.director.isGameOver = false; // 将游戏结束改为false
 
         this.DataStore.set("background", new Background())
             .set("land", new Land())
             .set("pipes", [])
             .set("birds", new Birds())
+            .set("startButton", new StartButton())
+            .set("score", new Score())
+
+
+        // 调用游戏的单击事件
+        this.gameEvent();
         //  先创建一组水管
-        this.directory.createPipes();
+        this.director.createPipes();
 
         // 开始运行
-        this.directory.run();
+        this.director.run();
+    }
+// 绑定单击事件
+    gameEvent() {
+        this.canvas.addEventListener("touchstart", (e) => {
+          // wx.onTouchStart(res=>{ // 微信方法
+            if (this.director.isGameOver) {
+                // 游戏结束，点击重新开始
+                this.init();
+                //  销毁上一局数据，由导演负责
+            } else {
+                // console.log(new Director);
+                this.director.birdsUp();
+
+            }
+        })
     }
 }

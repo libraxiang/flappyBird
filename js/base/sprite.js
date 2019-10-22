@@ -33,13 +33,13 @@ export class Sprite {
 
         // 画图
     draw(img = this.img, srcX = this.srcX, srcY = this.srcY, srcW = this.srcW, srcH = this.srcH, x = this.x, y = this.y, width = this.width, height = this.height) {
-        // console.log("Sprite:", this);  // 
+        // console.log("Sprite:", this);  
         
         this.ctx.drawImage(img, srcX, srcY, srcW, srcH, x, y, width, height);
         
     }
 
-    //  获取制定图片
+    //  获取指定图片
     static getImage(key) {
         return DataStore.getInstance().res.get(key);
     }

@@ -9,8 +9,10 @@ export class ResourceLoader {
         // console.log(this.map);
         //  遍历集合map ，将其中的字符串路径替换为 img对象
         for (const [k, v] of this.map) {
+
             // const img = wx.createImage(); // 微信端适用
             const img = new Image(); // 页面适用
+
             img.src = v; // 将图片路径赋值给 img 的 src属性
             //  将原来的字符串 替换为 img对象(重新设置key 对应的值)
 

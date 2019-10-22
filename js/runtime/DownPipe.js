@@ -12,7 +12,7 @@ export class DownPipe extends Pipe{
 
     //  重写 Pipe 中的 draw 方法
     draw() {
-        let gap = DataStore.getInstance().canvas.height / 6
+        let gap = DataStore.getInstance().canvas.height / 5
         this.y = this.top + gap;
         super.draw();
     }
