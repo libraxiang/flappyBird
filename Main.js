@@ -8,6 +8,7 @@ import { Director } from "./js/Director.js";
 import { Birds } from "./js/player/Birds.js";
 import { StartButton } from "./js/player/StartButton.js";
 import { Score } from "./js/player/Score.js";
+import { Tool } from "./extra.js";
 
 
 export class Main {
@@ -15,8 +16,8 @@ export class Main {
         console.log("Game Start");
 
         // 初始化画布
-        this.canvas = document.getElementById("game"); // 页面
-        // this.canvas =wx.createCanvas(); // 微信
+        // this.canvas = document.getElementById("game"); // 页面
+        this.canvas =wx.createCanvas(); // 微信
 
         this.ctx = this.canvas.getContext("2d");
 
@@ -49,7 +50,10 @@ export class Main {
         this.DataStore.ctx = this.ctx;
         this.DataStore.res = map;
         this.ctx.fillText("aaa",0,0);
-
+        let t = new Tool();
+        t.voice("./audio/bgm.mp3",true).play();
+        t.getTelInfo();
+        t.getUserInfo();
         this.init();
     }
     // 游戏初始化,初始化游戏中的数据，将其保存进变量池中
@@ -75,8 +79,8 @@ export class Main {
     }
 // 绑定单击事件
     gameEvent() {
-        this.canvas.addEventListener("touchstart", (e) => {
-          // wx.onTouchStart(res=>{ // 微信方法
+        // this.canvas.addEventListener("touchstart", (e) => {
+          wx.onTouchStart(res=>{ // 微信方法
             if (this.director.isGameOver) {
                 // 游戏结束，点击重新开始
                 this.init();
