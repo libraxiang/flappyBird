@@ -7,7 +7,7 @@ export class Background extends Sprite{
     constructor() {
         // 获取背景图片
         const img = Sprite.getImage("background");
-        console.log(img);
+        // console.log(img);
 
         //  获取画布的宽高
         const width = DataStore.getInstance().canvas.width;

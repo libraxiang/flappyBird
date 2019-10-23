@@ -10,7 +10,7 @@ export class StartButton extends Sprite {
         const land = Sprite.getImage("land");
         const x = (canvas.width - img.width) / 2;
         const y = (canvas.height-land.height - img.height) / 2;
-        console.log(land.height);
+        // console.log(land.height);
         super(img,0,0,img.width,img.height,x,y,img.width,img.height);
     }
 }
